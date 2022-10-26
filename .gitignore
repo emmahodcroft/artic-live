@@ -3,6 +3,8 @@
 background-build/results/
 background-build/auspice/
 
+#no snakemake
+.snakemake/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
