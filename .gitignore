@@ -1,3 +1,9 @@
+# FOR THIS GITHUB
+# do not upload intermediate or results folders
+background-build/results/
+background-build/auspice/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
