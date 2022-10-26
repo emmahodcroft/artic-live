@@ -1,0 +1,229 @@
+
+sequences = "data/arena_background_segment_{segment}.fasta",
+reference = "config/artic_arenavirus_rodent_{segment}_2022-10-04.gb",
+auspice_config = "config/auspice_config_{segment}.json",
+case_seq = "data/case_{segment}.fasta",
+case_data = "data/case_{segment}.csv",
+lat_longs = "config/lat_longs.tsv",
+description = "config/description.md",
+#This excludes some sequences from the S segment to allow the tanglegram to de-tangle better.
+exclude_file = "config/exclude_file.txt",
+
+output_file = "auspice/artic-live_arenavirus_{segment}.json",
+
+#to run, should be able to do something similar to
+#       snakefile --cores 2 do_S
+
+rule do_S:
+    input:
+        "auspice/artic-live_arenavirus_S.json"
+
+rule do_L:
+    input:
+        "auspice/artic-live_arenavirus_L.json"
+
+#############
+####### RULES
+#############
+
+# if different backgrond files are used, may need to adjust the order/number of the fasta headers you parse for each semgent
+# You will also need to adjust the metadata in the "case_data" file to match these columns!
+def _parse_fields(wildcards):
+    if wildcards.segment == "L": #if L segment
+        return "strain family accession host country raw_date"
+    else: # if S
+        return "strain segment genus species number accession host country raw_date"  
+
+# This parses out the metadata fields from the fasta files, separated by |
+rule parse:
+    input:
+        sequences = sequences,
+    output:
+        metadata = "results/metadataNoDate_{segment}.csv",
+        sequences = "results/sequences_first_{segment}.fasta"
+    params: 
+        meta_fields = _parse_fields
+    shell:
+        """
+        augur parse --sequences {input.sequences} --output-metadata {output.metadata} \
+            --output-sequences {output.sequences} \
+            --fields {params.meta_fields}
+        """
+
+# This fixes dates to the format augur needs (YYYY-MM-DD with XX for uncertainty) and deduplicates strain names
+rule fix_dates:
+    input:
+        metadata = rules.parse.output.metadata,
+        sequences = rules.parse.output.sequences,
+    output:
+        metadata = "results/metadata_{segment}_noCase.csv",
+        sequences = "results/sequences_{segment}_noCase.fasta",
+    shell:
+        """
+        Rscript scripts/fix_dates_duplicates.r {input.metadata} \
+            {input.sequences} {output.metadata} {output.sequences}
+        """
+# We want to add our first case to the analysis, both metadata & sequence
+rule add_case:
+    input:
+        metadata = rules.fix_dates.output.metadata,
+        case = case_data,
+    output:
+        metadata = "results/metadata_{segment}.csv",
+    shell:
+        """
+        cat {input.metadata} {input.case} > {output.metadata}
+        """
+
+# We want to add our first case to the analysis, both metadata & sequence
+rule add_case_seq:
+    input:
+        sequences = rules.fix_dates.output.sequences,
+        case = case_seq,
+    output:
+        sequences = "results/sequences_prefilter-{segment}.fasta"
+    shell:
+        """
+        cat {input.sequences} {input.case} > {output.sequences}
+        """
+
+#This removes some of the background sequences in S so that the tanglegram detangles better
+# (the view in augur is weighted by number, so balancing the numbers balances the tanglegram)
+#This will need to be adjusted for different background files
+rule filter:
+    input:
+        sequences = rules.add_case_seq.output.sequences,
+        metadata = rules.add_case.output.metadata,
+        exclude = exclude_file,
+    output:
+        sequences = "results/sequences_{segment}.fasta",
+        reasons = "results/filtering_reasons{segment}.tsv",
+    shell:
+        """
+        augur filter --sequences {input.sequences} --metadata {input.metadata} \
+            --exclude {input.exclude} \
+            --output {output.sequences} \
+            --output-log {output.reasons}
+        """
+
+# Align our background sequences & case to the reference
+rule align:
+    input:
+        sequences = rules.filter.output.sequences,
+        reference = reference,
+    output:
+        alignment = "results/aligned_{segment}.fasta"
+    shell:
+        """
+        augur align --sequences {input.sequences} --output {output.alignment} \
+            --reference-sequence {input.reference} --remove-reference
+        """
+
+#Make a tree (IQTree)
+rule tree:
+    input:
+        alignment = rules.align.output.alignment 
+    output:
+        tree = "results/raw_tree_{segment}.nwk"
+    shell:
+        """
+        augur tree --alignment {input.alignment} --output {output.tree}
+        """
+
+# We need to refine even without time so that we have 'node names', required by auspice
+# This then roots by the monophyletic clade given by the 2 sequences named
+# The rooting may need to be adjusted if new background files are used
+rule refine:
+    input:
+        tree = rules.tree.output.tree,
+        alignment = rules.align.output.alignment,
+        metadata = rules.add_case.output.metadata,
+    output:
+        tree = "results/tree_{segment}.nwk",
+        node_data = "results/branch_lengths_{segment}.json"
+    params:
+        clock_filter_iqd = 5
+    shell:
+        """
+        augur refine --tree {input.tree} --alignment {input.alignment} \
+            --metadata {input.metadata} \
+            --output-tree {output.tree} --output-node-data {output.node_data} \
+            --branch-length-inference input  --root Mopeia_mammarenavirus2 Rotterdam_reptarenavirus
+        """
+        # These can be included to get a time-tree, but beware, it is not terribly accurate
+        # --timetree --date-confidence --date-inference marginal --coalescent opt \
+        # --clock-filter-iqd {params.clock_filter_iqd} \
+        # --clock-rate 2e-3 --clock-std-dev 5e-4 \
+        # --branch-length-inference marginal 
+
+#Reconstruct ancestral sequences so we can see coloring by genotype/AA down the tree & mutations on branches
+rule ancestral:
+    input:
+        tree = rules.refine.output.tree,
+        alignment = rules.align.output.alignment,
+    output:
+        nt_data = "results/nt_muts_{segment}.json"
+    params:
+        inference = "joint"
+    shell:
+        """
+        augur ancestral --tree {input.tree} --alignment {input.alignment} \
+            --output-node-data {output.nt_data} --inference {params.inference} \
+            --keep-ambiguous
+        """
+
+#Translate genes so that we can see AA changes as well as nucs
+rule translate:
+    input:
+        tree = rules.refine.output.tree,
+        node_data = rules.ancestral.output.nt_data,
+        reference = reference
+    output:
+        aa_data = "results/aa_muts_{segment}.json"
+    params:
+        gene_alignment = "results/aa_alignment_{segment}_%GENE.fasta"
+    shell:
+        """
+        augur translate --tree {input.tree} --ancestral-sequences {input.node_data} \
+            --alignment-output {params.gene_alignment} \
+            --output-node-data {output.aa_data} --reference-sequence {input.reference}
+        """
+
+#Export to Augur
+rule export:
+    input:
+        tree = rules.refine.output.tree,
+        metadata = rules.add_case.output.metadata,
+        branch_lengths = rules.refine.output.node_data,
+        nt_muts = rules.ancestral.output.nt_data,
+        aa_muts = rules.translate.output.aa_data,
+        auspice_config = auspice_config,
+        lat_lon = lat_longs,
+        description = description,
+    output:
+        auspice = output_file
+    shell:
+        """
+        augur export v2 --tree {input.tree} --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.nt_muts} \
+                {input.aa_muts} \
+            --output {output.auspice} \
+            --include-root-sequence \
+            --auspice-config {input.auspice_config} \
+            --description {input.description} \
+            --lat-longs {input.lat_lon}
+        """
+
+#This copies the output files to the arctic-live/auspice folder so they can be viewed through 
+# the Nextstrain community-build feature
+SEGS = ["S", "L"]
+rule go_live:
+    input:
+        expand(rules.export.output, segment=SEGS)
+    output:
+        directory("../auspice/")
+    shell:
+        '''
+        cp {input} {output}
+        '''
+

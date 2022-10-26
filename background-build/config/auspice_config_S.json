@@ -1,0 +1,39 @@
+{
+  "title": "Arenavirus segment S phylogeny",
+  "colorings": [
+    {
+      "title": "Sampling date",
+      "type": "categorical",
+      "key": "date"
+    },
+    {
+      "title": "Country",
+      "key": "country",
+      "type": "categorical"
+    },
+    {  "title": "Host",
+       "key": "host",
+       "type": "categorical"
+    }
+  ],
+  "geo_resolutions": [
+    "country"
+  ],
+  "maintainers": [
+    {"name": "Emma Hodcroft", "url": ""},
+    {"name": "Aine O'Toole", "url": ""},
+    {"name": "Sam Wilkinson", "url": ""},
+    {"name": "Nick Loman", "url": ""},
+    {"name": "Ian Goodfellow", "url": ""},
+    {"name": "Andrew Rambaut", "url": ""}
+  ],
+  "filters": [
+    "country", 
+    "date"
+  ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy"
+  ]
+}

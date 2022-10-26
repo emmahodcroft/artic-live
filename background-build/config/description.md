@@ -1,0 +1,1 @@
+This phylogeny contains a "sample" (case128) from a completely fictional virus created for the purposes of a bioinformatics simulation exercise. 
