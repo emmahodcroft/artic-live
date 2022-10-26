@@ -1,0 +1,53 @@
+{
+  "title": "Novel arenavirus results (S+L)",
+  "colorings": [
+    {
+      "title": "Sampling date",
+      "type": "continuous",
+      "key": "num_date"
+    },
+    {
+      "title": "Location",
+      "key": "location",
+      "type": "categorical"
+    },
+    {
+      "title": "Sequencing order",
+      "type": "categorical",
+      "key": "sequence_order"
+    },
+    {
+      "title": "Suspected exposure",
+      "type": "categorical",
+      "key": "suspected_exposure"
+    },
+    {
+      "title": "Symptom onset",
+      "type": "categorical",
+      "key": "symptom_onset"
+    }
+  ],
+  "geo_resolutions": [
+    "location"
+  ],
+  "maintainers": [
+    {"name": "Emma Hodcroft", "url": ""},
+    {"name": "Aine O'Toole", "url": ""},
+    {"name": "Sam Wilkinson", "url": ""},
+    {"name": "Nick Loman", "url": ""},
+    {"name": "Ian Goodfellow", "url": ""},
+    {"name": "Andrew Rambaut", "url": ""}
+  ],
+  "filters": [
+    "location", 
+    "symptom_onset"
+  ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy"
+  ],
+  "display_defaults": {
+    "distance_measure": "div"
+  }
+}

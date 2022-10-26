@@ -1,0 +1,168 @@
+
+wildcard_constraints:
+    clus="initial-cluster|additional-cases|all-cases"
+
+#This build starts with a simulated tree and set of sequences (N=51)
+# 'initial-cluster' builds the tree with just the initial 24 cases, using a tree which is a manually-extracted subtree of the original tree
+# 'additional-cases' builds the above, with 2 extra cases which fall in the original cluster (but unliked epidemiologically), again the tree is a manually-extracted subtree
+# 'all-cases' runs the whole initial tree and set of sequences
+
+# For subsampled builds (the first two), sequences/metadata are downsampled using pre-configured 'include' files
+
+init_sequences = "data/simulated_data-all-cases.fasta",
+raw_tree = "data/simulated_tree-{clus}.nwk",
+init_metadata = "data/metadata-all-cases.csv",
+
+reference = "config/artic_arenavirus_rodent_2022-10-04.gb",
+lat_longs = "config/lat_longs.tsv",
+auspice_config = "config/auspice_config.json",
+colors = "config/colors.txt",
+description = "config/description.md",
+include_file = "config/cluster-{clus}_list.csv"
+
+output_file = "auspice/artic-live_HMFV_{clus}.json"
+
+#to run, should be able to do something similar to
+#       snakefile --cores 2 do_init
+
+rule do_init:
+    input:
+        "auspice/artic-live_HMFV_initial-cluster.json"
+
+rule do_additional:
+    input:
+        "auspice/artic-live_HMFV_additional-cases.json"
+
+rule do_all:
+    input:
+        "auspice/artic-live_HMFV_all-cases.json"
+
+# For runs other than `all-cases` this downsamples the metadata & sequences to match the desired cluster size
+rule filter:
+    input:
+        sequences = init_sequences,
+        metadata = init_metadata,
+        include = include_file,
+    output:
+        sequences = "data/simulated_data-{clus}.fasta",
+        metadata = "data/metadata-{clus}.csv",
+    shell:
+        """
+        augur filter --sequences {input.sequences} --metadata {input.metadata} \
+            --include {input.include} \
+            --exclude-all \
+            --output {output.sequences} \
+            --output-metadata {output.metadata} 
+        """
+
+# This refines & gives us a time tree - note clock rate is fixed, root is kept fixed with simulated tree
+rule refine:
+    input:
+        tree = raw_tree,
+        alignment = "data/simulated_data-{clus}.fasta",
+        metadata = "data/metadata-{clus}.csv",
+    output:
+        tree = "results/tree-{clus}.nwk",
+        node_data = "results/branch_lengths-{clus}.json"
+    params:
+        clock_filter_iqd = 5
+    shell:
+        """
+        augur refine --tree {input.tree} --alignment {input.alignment} \
+            --metadata {input.metadata} \
+            --output-tree {output.tree} --output-node-data {output.node_data} \
+            --timetree --date-confidence --date-inference marginal --coalescent opt \
+            --branch-length-inference marginal \
+            --keep-root \
+            --clock-filter-iqd {params.clock_filter_iqd} \
+            --clock-rate 2e-3 --clock-std-dev 5e-4
+        """
+
+# reconstruct ancestral sequences so that we can see mutation changes on branches & through colouring
+rule ancestral:
+    input:
+        tree = rules.refine.output.tree,
+        alignment = "data/simulated_data-{clus}.fasta",
+    output:
+        nt_data = "results/nt_muts-{clus}.json"
+    params:
+        inference = "joint"
+    shell:
+        """
+        augur ancestral --tree {input.tree} --alignment {input.alignment} \
+            --output-node-data {output.nt_data} --inference {params.inference} \
+            --keep-ambiguous
+        """
+
+#Translate genes so that we can see AA changes as well as nucs
+rule translate:
+    input:
+        tree = rules.refine.output.tree,
+        node_data = rules.ancestral.output.nt_data,
+        reference = reference
+    output:
+        aa_data = "results/aa_muts-{clus}.json"
+    params:
+        gene_alignment = "results/aa_alignment_%GENE.fasta"
+    shell:
+        """
+        augur translate --tree {input.tree} --ancestral-sequences {input.node_data} \
+            --alignment-output {params.gene_alignment} \
+            --output-node-data {output.aa_data} --reference-sequence {input.reference}
+        """
+
+#Export to auspice
+rule export:
+    input:
+        tree = rules.refine.output.tree,
+        metadata = "data/metadata-{clus}.csv",
+        branch_lengths = rules.refine.output.node_data,
+        nt_muts = rules.ancestral.output.nt_data,
+        aa_muts = rules.translate.output.aa_data,
+        lat_lon = lat_longs,
+        auspice_config = auspice_config,
+        colors = colors,
+        description = description,
+    output:
+        auspice = output_file
+    shell:
+        """
+        augur export v2 --tree {input.tree} --metadata {input.metadata} \
+            --node-data {input.branch_lengths} {input.nt_muts} \
+                {input.aa_muts} --lat-longs {input.lat_lon} \
+            --output {output.auspice} \
+            --auspice-config {input.auspice_config} \
+            --colors {input.colors} \
+            --description {input.description} \
+            --include-root-sequence 
+        """
+
+#This copies the output files to the arctic-live/auspice folder so they can be viewed through 
+# the Nextstrain community-build feature
+CLUST = ["initial-cluster", "additional-cases", "all-cases"]
+rule go_live:
+    input:
+        init = "auspice/artic-live_HMFV_initial-cluster.json",
+        add = "auspice/artic-live_HMFV_additional-cases.json",
+        al = "auspice/artic-live_HMFV_all-cases.json",
+        initrc = "auspice/artic-live_HMFV_initial-cluster_root-sequence.json",
+        addrc = "auspice/artic-live_HMFV_additional-cases_root-sequence.json",
+        alrc = "auspice/artic-live_HMFV_all-cases_root-sequence.json",
+    output:
+        init = "../auspice/artic-live_HMFV_initial-cluster.json",
+        add = "../auspice/artic-live_HMFV_additional-cases.json",
+        al = "../auspice/artic-live_HMFV_all-cases.json",
+        initrc = "../auspice/artic-live_HMFV_initial-cluster_root-sequence.json",
+        addrc = "../auspice/artic-live_HMFV_additional-cases_root-sequence.json",
+        alrc = "../auspice/artic-live_HMFV_all-cases_root-sequence.json",
+    shell:
+        '''
+        cp {input.init} {output.init}
+        cp {input.add} {output.add}
+        cp {input.al} {output.al}
+        cp {input.initrc} {output.initrc}
+        cp {input.addrc} {output.addrc}
+        cp {input.alrc} {output.alrc}
+        '''
+
+

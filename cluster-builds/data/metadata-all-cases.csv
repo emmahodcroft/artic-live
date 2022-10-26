@@ -1,0 +1,52 @@
+strain,onset,sampleTime,parentId,childrenId,spillover_tree,decimal_year,symptom_onset,date,location_code,location,longitude,latitude,sequence_order,suspected_exposure
+case128,61,84.4201149,case39,case229;case233;case234;case248;case271;case352;,superspreader,2022.69589,2022-09-12,2022-09-12,B3,Scrippsville,-117.225107,32.884414,index case,unknown
+case229,72.43,93.53965412,case128,Noforwardtransmission,superspreader,2022.720548,2022-09-14,2022-09-21,B4,Hillcrest,-117.1641,32.746981,linked to index,rock concert
+case533,90.43,117.5015238,case233,Nocontactsyet,superspreader,2022.786301,2022-10-11,2022-10-15,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case271,75.76,94.12199614,case128,Noforwardtransmission,superspreader,2022.723288,2022-09-18,2022-09-22,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case352,81.42,99.56173714,case128,Noforwardtransmission,superspreader,2022.736986,2022-09-25,2022-09-27,B3,Scrippsville,-117.225107,32.884414,linked to index,rock concert
+case248,73.97,93.99136974,case128,case451;case455;case549;,superspreader,2022.720548,2022-09-18,2022-09-21,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case233,73.33,93.4333061,case128,case417;case533;,superspreader,2022.720548,2022-09-15,2022-09-21,B1,Alcatraz,-122.42179,37.825293,linked to index,rock concert
+case417,85.01,95.46357634,case233,Nocontactsyet,superspreader,2022.726027,2022-09-20,2022-09-23,B2,Fresno,-119.784263,36.742251,linked to index,rock concert
+case451,86.14,96.99297568,case248,case627;,superspreader,2022.728767,2022-09-20,2022-09-24,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case627,93.99,103.2950138,case451,Nocontactsyet,superspreader,2022.747945,2022-09-28,2022-10-01,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case549,90.99,102.7922374,case248,Nocontactsyet,superspreader,2022.745205,2022-09-27,2022-09-30,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case705,96.68,110.2267375,case435,Nocontactsyet,superspreader,2022.767123,2022-10-05,2022-10-08,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case667,95.39,108.2477696,case443,Nocontactsyet,superspreader,2022.761644,2022-10-01,2022-10-06,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case443,85.99,99.43844761,case234,case635;case667;case701;,superspreader,2022.736986,2022-09-24,2022-09-27,B6,Coachella valley,-116.238132,33.683451,linked to index,rock concert
+case527,90.01,100.4501718,case234,Nocontactsyet,superspreader,2022.739726,2022-09-25,2022-09-28,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case710,96.82,109.3317638,case435,Nocontactsyet,superspreader,2022.764384,2022-10-02,2022-10-07,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case554,91.16,104.2808597,case338,Noforwardtransmission,superspreader,2022.750685,2022-09-29,2022-10-02,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case568,91.64,109.3944114,case338,Nocontactsyet,superspreader,2022.764384,2022-10-04,2022-10-07,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case764,98.47,120.8361447,case338,Noforwardtransmission,superspreader,2022.794521,2022-10-14,2022-10-18,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case338,80.55,101.4707526,case234,case554;case568;case764;,superspreader,2022.742466,2022-09-25,2022-09-29,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case635,94.23,101.6960004,case443,Noforwardtransmission,superspreader,2022.742466,2022-09-24,2022-09-29,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case701,96.44,112.6883194,case443,Nocontactsyet,superspreader,2022.772603,2022-10-08,2022-10-10,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case234,73.34,93.01309196,case128,case338;case435;case443;case527;,superspreader,2022.720548,2022-09-15,2022-09-21,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case435,85.59,99.81541772,case234,case705;case710;,superspreader,2022.736986,2022-09-25,2022-09-27,B5,Ocean beach,-117.250417,32.75124,linked to index,rock concert
+case156,64.84,78.85893819,case37,case272;,spillover_1,2022.679452,2022-09-01,2022-09-06,A1,Gas Point,-116.966246,33.331411,new sequence,hunting squirrels
+case202,70.23,93.33285738,case98,case305;case362;case369;case485;case531;,spillover_3,2022.720548,2022-09-12,2022-09-21,A4,Bummerville,-119.960745,34.523555,new sequence,hiking
+case242,73.73,94.99031066,case92,case342;case357;case358;case517;case578;,spillover_4,2022.723288,2022-09-13,2022-09-22,A5,Palm Springs,-116.545606,33.839896,new sequence,hiking
+case272,75.86,91.10672797,case156,case487;,spillover_1,2022.715068,2022-09-09,2022-09-19,A1,Gas Point,-116.966246,33.331411,new sequence,hunting squirrels
+case274,75.95,95.65122649,case125,case437;case506;case594;,spillover_5,2022.726027,2022-09-19,2022-09-23,A3,Badwater Basin,-117.441692,33.522097,new sequence,camping
+case388,83.53,100.446326,case322,case586;case722;,spillover_8,2022.739726,2022-09-28,2022-09-28,A5,Palm Springs,-116.545606,33.839896,new sequence,camping
+case421,85.17,102.828006,case237,case634;case651;case819;,spillover_2,2022.745205,2022-09-25,2022-09-30,A1,Gas Point,-116.966246,33.331411,new sequence,trail running
+case437,85.61,95.56873321,case274,Nocontactsyet,spillover_5,2022.726027,2022-09-19,2022-09-23,A3,Badwater Basin,-117.441692,33.522097,new sequence,camping
+case455,86.58,101.3387721,case248,case759;,superspreader,2022.742466,2022-09-26,2022-09-29,B4,Hillcrest,-117.1641,32.746981,additional case,campervan camping in peaky valley
+case473,87.44,100.4515497,case215,case723;,spillover_7,2022.739726,2022-09-26,2022-09-28,A3,Badwater Basin,-117.441692,33.522097,new sequence,fishing
+case485,87.92,102.1371805,case202,case718;case792;,spillover_3,2022.745205,2022-09-28,2022-09-30,A4,Bummerville,-119.960745,34.523555,new sequence,contact with another case
+case487,88.11,106.6721909,case272,Nocontactsyet,spillover_1,2022.756164,2022-10-01,2022-10-04,A1,Gas Point,-116.966246,33.331411,new sequence,contact with another case
+case490,88.29,100.7938753,case261,case688;case739;,spillover_6,2022.739726,2022-09-26,2022-09-28,A2,Death Valley,-116.662583,33.018437,new sequence,camping
+case506,88.95,98.67540057,case274,Nocontactsyet,spillover_5,2022.734247,2022-09-23,2022-09-26,A3,Badwater Basin,-117.441692,33.522097,new sequence,camping
+case517,89.52,98.20443907,case242,Nocontactsyet,spillover_4,2022.734247,2022-09-24,2022-09-26,A5,Palm Springs,-116.545606,33.839896,new sequence,hiking
+case531,90.33,103.3193638,case202,Noforwardtransmission,spillover_3,2022.747945,2022-10-01,2022-10-01,A4,Bummerville,-119.960745,34.523555,new sequence,hiking
+case578,91.99,101.7925595,case242,Nocontactsyet,spillover_4,2022.742466,2022-09-25,2022-09-29,A5,Palm Springs,-116.545606,33.839896,new sequence,contact with another case
+case586,92.33,101.6276174,case388,Nocontactsyet,spillover_8,2022.742466,2022-09-25,2022-09-29,A5,Palm Springs,-116.545606,33.839896,new sequence,hiking
+case594,92.65,100.8184485,case274,Noforwardtransmission,spillover_5,2022.739726,2022-09-24,2022-09-28,A3,Badwater Basin,-117.441692,33.522097,new sequence,camping
+case688,96.04,109.2960886,case490,Nocontactsyet,spillover_6,2022.764384,2022-10-05,2022-10-07,A2,Death Valley,-116.662583,33.018437,new sequence,camping
+case718,97.13,114.1892929,case485,Nocontactsyet,spillover_3,2022.778082,2022-10-11,2022-10-12,A4,Bummerville,-119.960745,34.523555,new sequence,hiking
+case722,97.45,105.976557,case388,Nocontactsyet,spillover_8,2022.753425,2022-10-01,2022-10-03,A5,Palm Springs,-116.545606,33.839896,new sequence,contact with another case
+case723,97.45,110.0410305,case473,Nocontactsyet,spillover_7,2022.767123,2022-10-07,2022-10-08,A3,Badwater Basin,-117.441692,33.522097,new sequence,fishing
+case739,97.79,111.8067009,case490,Nocontactsyet,spillover_6,2022.769863,2022-10-06,2022-10-09,A2,Death Valley,-116.662583,33.018437,new sequence,camping
+case759,98.34,117.9148466,case455,Nocontactsyet,superspreader,2022.786301,2022-10-11,2022-10-15,B4,Hillcrest,-117.1641,32.746981,additional case,campervan camping in peaky valley
+case792,99.14,113.3601049,case485,Nocontactsyet,spillover_3,2022.775342,2022-10-06,2022-10-11,A4,Bummerville,-119.960745,34.523555,new sequence,contact with another case
+case819,99.83,108.6403334,case421,Nocontactsyet,spillover_2,2022.761644,2022-10-02,2022-10-06,A1,Gas Point,-116.966246,33.331411,new sequence,contact with another case

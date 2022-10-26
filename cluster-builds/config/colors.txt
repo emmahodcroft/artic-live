@@ -1,0 +1,50 @@
+symptom_onset	2022-09-01	#5E1D9D
+symptom_onset	2022-09-09	#4B25B1
+symptom_onset	2022-09-12	#4137C2
+symptom_onset	2022-09-13	#3F4CCB
+symptom_onset	2022-09-14	#3F62D0
+symptom_onset	2022-09-15	#4376CD
+symptom_onset	2022-09-18	#4887C6
+symptom_onset	2022-09-19	#4F97BB
+symptom_onset	2022-09-20	#58A2AC
+symptom_onset	2022-09-23	#62AB9C
+symptom_onset	2022-09-24	#6DB38A
+symptom_onset	2022-09-25	#7BB77A
+symptom_onset	2022-09-26	#89BB6B
+symptom_onset	2022-09-27	#98BD5E
+symptom_onset	2022-09-28	#A8BE54
+symptom_onset	2022-09-29	#B7BD4B
+symptom_onset	2022-10-01	#C5B945
+symptom_onset	2022-10-02	#D2B340
+symptom_onset	2022-10-04	#DDAA3C
+symptom_onset	2022-10-05	#E39C39
+symptom_onset	2022-10-06	#E68B35
+symptom_onset	2022-10-07	#E67631
+symptom_onset	2022-10-08	#E35C2C
+symptom_onset	2022-10-11	#DF4227
+symptom_onset	2022-10-14	#DB2823
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
