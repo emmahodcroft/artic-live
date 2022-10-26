@@ -1,25 +1,25 @@
 strain	onset	sampleTime	parentId	childrenId	spillover_tree	decimal_year	symptom_onset	date	location_code	location	longitude	latitude	sequence_order	suspected_exposure
-case710	96.82	109.3317638	case435	Nocontactsyet	superspreader	2022.764384	2022-10-02	2022-10-07	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case435	85.59	99.81541772	case234	case705;case710;	superspreader	2022.736986	2022-09-25	2022-09-27	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case128	61.0	84.4201149	case39	case229;case233;case234;case248;case271;case352;	superspreader	2022.69589	2022-09-12	2022-09-12	B3	Scrippsville	-117.225107	32.884414	index case	unknown
-case705	96.68	110.2267375	case435	Nocontactsyet	superspreader	2022.767123	2022-10-05	2022-10-08	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case568	91.64	109.3944114	case338	Nocontactsyet	superspreader	2022.764384	2022-10-04	2022-10-07	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case271	75.76	94.12199614	case128	Noforwardtransmission	superspreader	2022.723288	2022-09-18	2022-09-22	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
-case234	73.34	93.01309196	case128	case338;case435;case443;case527;	superspreader	2022.720548	2022-09-15	2022-09-21	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case417	85.01	95.46357634	case233	Nocontactsyet	superspreader	2022.726027	2022-09-20	2022-09-23	B2	Fresno	-119.784263	36.742251	linked to index	rock concert
-case248	73.97	93.99136974	case128	case451;case455;case549;	superspreader	2022.720548	2022-09-18	2022-09-21	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
-case533	90.43	117.5015238	case233	Nocontactsyet	superspreader	2022.786301	2022-10-11	2022-10-15	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case701	96.44	112.6883194	case443	Nocontactsyet	superspreader	2022.772603	2022-10-08	2022-10-10	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case338	80.55	101.4707526	case234	case554;case568;case764;	superspreader	2022.742466	2022-09-25	2022-09-29	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case549	90.99	102.7922374	case248	Nocontactsyet	superspreader	2022.745205	2022-09-27	2022-09-30	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
-case635	94.23	101.6960004	case443	Noforwardtransmission	superspreader	2022.742466	2022-09-24	2022-09-29	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
 case229	72.43	93.53965412	case128	Noforwardtransmission	superspreader	2022.720548	2022-09-14	2022-09-21	B4	Hillcrest	-117.1641	32.746981	linked to index	rock concert
-case451	86.14	96.99297568	case248	case627;	superspreader	2022.728767	2022-09-20	2022-09-24	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
-case527	90.01	100.4501718	case234	Nocontactsyet	superspreader	2022.739726	2022-09-25	2022-09-28	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
-case627	93.99	103.2950138	case451	Nocontactsyet	superspreader	2022.747945	2022-09-28	2022-10-01	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
-case764	98.47	120.8361447	case338	Noforwardtransmission	superspreader	2022.794521	2022-10-14	2022-10-18	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
 case233	73.33	93.4333061	case128	case417;case533;	superspreader	2022.720548	2022-09-15	2022-09-21	B1	Alcatraz	-122.42179	37.825293	linked to index	rock concert
-case443	85.99	99.43844761	case234	case635;case667;case701;	superspreader	2022.736986	2022-09-24	2022-09-27	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case417	85.01	95.46357634	case233	Nocontactsyet	superspreader	2022.726027	2022-09-20	2022-09-23	B2	Fresno	-119.784263	36.742251	linked to index	rock concert
+case549	90.99	102.7922374	case248	Nocontactsyet	superspreader	2022.745205	2022-09-27	2022-09-30	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case627	93.99	103.2950138	case451	Nocontactsyet	superspreader	2022.747945	2022-09-28	2022-10-01	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case533	90.43	117.5015238	case233	Nocontactsyet	superspreader	2022.786301	2022-10-11	2022-10-15	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case435	85.59	99.81541772	case234	case705;case710;	superspreader	2022.736986	2022-09-25	2022-09-27	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
 case554	91.16	104.2808597	case338	Noforwardtransmission	superspreader	2022.750685	2022-09-29	2022-10-02	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case234	73.34	93.01309196	case128	case338;case435;case443;case527;	superspreader	2022.720548	2022-09-15	2022-09-21	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case527	90.01	100.4501718	case234	Nocontactsyet	superspreader	2022.739726	2022-09-25	2022-09-28	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case451	86.14	96.99297568	case248	case627;	superspreader	2022.728767	2022-09-20	2022-09-24	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case764	98.47	120.8361447	case338	Noforwardtransmission	superspreader	2022.794521	2022-10-14	2022-10-18	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case710	96.82	109.3317638	case435	Nocontactsyet	superspreader	2022.764384	2022-10-02	2022-10-07	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case705	96.68	110.2267375	case435	Nocontactsyet	superspreader	2022.767123	2022-10-05	2022-10-08	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case443	85.99	99.43844761	case234	case635;case667;case701;	superspreader	2022.736986	2022-09-24	2022-09-27	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
 case667	95.39	108.2477696	case443	Nocontactsyet	superspreader	2022.761644	2022-10-01	2022-10-06	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case635	94.23	101.6960004	case443	Noforwardtransmission	superspreader	2022.742466	2022-09-24	2022-09-29	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case248	73.97	93.99136974	case128	case451;case455;case549;	superspreader	2022.720548	2022-09-18	2022-09-21	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case338	80.55	101.4707526	case234	case554;case568;case764;	superspreader	2022.742466	2022-09-25	2022-09-29	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
 case352	81.42	99.56173714	case128	Noforwardtransmission	superspreader	2022.736986	2022-09-25	2022-09-27	B3	Scrippsville	-117.225107	32.884414	linked to index	rock concert
+case271	75.76	94.12199614	case128	Noforwardtransmission	superspreader	2022.723288	2022-09-18	2022-09-22	B6	Coachella valley	-116.238132	33.683451	linked to index	rock concert
+case128	61.0	84.4201149	case39	case229;case233;case234;case248;case271;case352;	superspreader	2022.69589	2022-09-12	2022-09-12	B3	Scrippsville	-117.225107	32.884414	index case	unknown
+case568	91.64	109.3944114	case338	Nocontactsyet	superspreader	2022.764384	2022-10-04	2022-10-07	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
+case701	96.44	112.6883194	case443	Nocontactsyet	superspreader	2022.772603	2022-10-08	2022-10-10	B5	Ocean beach	-117.250417	32.75124	linked to index	rock concert
