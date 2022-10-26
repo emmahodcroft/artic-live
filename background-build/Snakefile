@@ -189,7 +189,7 @@ rule translate:
             --output-node-data {output.aa_data} --reference-sequence {input.reference}
         """
 
-#Export to Augur
+#Export to auspice
 rule export:
     input:
         tree = rules.refine.output.tree,
@@ -216,14 +216,35 @@ rule export:
 
 #This copies the output files to the arctic-live/auspice folder so they can be viewed through 
 # the Nextstrain community-build feature
-SEGS = ["S", "L"]
 rule go_live:
     input:
-        expand(rules.export.output, segment=SEGS)
+        l = "auspice/artic-live_arenavirus_L.json",
+        s = "auspice/artic-live_arenavirus_S.json",
+        lr = "auspice/artic-live_arenavirus_L_root-sequence.json",
+        sr = "auspice/artic-live_arenavirus_S_root-sequence.json",
     output:
-        directory("../auspice/")
+        l = "../auspice/artic-live_arenavirus_L.json",
+        s = "../auspice/artic-live_arenavirus_S.json",
+        lr = "../auspice/artic-live_arenavirus_L_root-sequence.json",
+        sr = "../auspice/artic-live_arenavirus_S_root-sequence.json",
     shell:
         '''
-        cp {input} {output}
+        cp {input.l} {output.l}
+        cp {input.s} {output.s}
+        cp {input.lr} {output.lr}
+        cp {input.sr} {output.sr}
         '''
+
+
+
+#SEGS = ["S", "L"]
+#rule go_live:
+#    input:
+#        expand(rules.export.output, segment=SEGS)
+#    output:
+#        directory("../auspice/")
+#    shell:
+#        '''
+#        cp {input} {output}
+#        '''
 
